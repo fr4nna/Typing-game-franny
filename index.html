@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Almendra+SC&family=Pirata+One&family=Sour+Gummy:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+    <title>Typing Game</title>
+    <link rel="stylesheet" type="text/css" href="style.css">
+</head>
+<body>
+
+<!-- shift tab to bring back code -->
+
+<div class="menu" id="mainMenu">
+    <p>Franzine and anne's<br>
+    <h1>Typing Game</h1>
+
+    <button id="Button">Start</button>
+</div>
+
+<div class="defeat_container">
+    <div id="message"></div>
+</div>
+
+ 
+    <!-- characters div -->
+    <!--
+    SPRITES FROM TINY RPG CHARACTER ASSET PACK BY ZERIE ON ITCH.IO
+    https://zerie.itch.io/tiny-rpg-character-asset-pack
+    -->
+    <div class="border">
+       
+        <div class="protag">
+            <div class="hp" id="character-hp-bar"></div>
+            
+            <div class="character">
+                <img src="images/Soldier-spritesheet.png" alt="" class="pixelart character-sprite character-idle">
+            </div>
+        </div>
+
+        <div class="score-section">
+        <p>Score: <span id="score">0</span></p>
+        </div>
+    
+
+        <div class="enemy">
+            <div class="hp" id="monster-hp-bar"></div>
+            <div class="monster">
+                <img src="images/orc-spritesheet.png" alt="" class="pixelart monster-sprite monster-idle">
+            </div>
+        </div>
+
+    </div>
+    
+    <div class="word_box">
+        <div id="word_time">
+            <div class="time_section"><p>Time left: <span id="timer">Two</span> seconds</p></div>
+            <div class="word_section"> 
+                <div id="word"></div>
+            </div>
+        </div>
+
+        <div class="buttons">
+            <button id="start-btn" onclick="startGame()">Start</button>
+            <button id="reset-button" onclick="return resetGame();">Reset Game</button>
+        </div>
+            <div class="input_field">
+                
+                <!--
+                PLEASE DO NOT TOUCH THE <SECTION> ELEMENT
+                I TRIED TO CLEAN UP THIS EMPTY SPACE AND I HAVE NO IDEA WHY THE PAGE BREAKS WHEN I DELETE IT
+
+                I FEAR THE GODS OF CODE AND I WISH TO NOT ANGER THEM ANY FURTHER
+
+                –ANNE
+                -->
+
+                <section>
+                    
+                    
+                
+                    <input type="text" id="input" autocomplete="off" disabled>
+                    
+                    <p ></p>
+
+                </section>	
+                
+            </div>
+
+    </div>
+       
+    <script type="text/javascript" src="script.js"></script>
+</body>
+</html>

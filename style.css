@@ -1,0 +1,482 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Almendra SC", serif;
+  }
+  html, body {
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+  }
+  
+:root {
+    --pixelsize: 3;
+}
+
+
+body {
+    
+    height: 100 auto;
+    background: #f0f0f0;
+    font-family: Arial, sans-serif;
+    overflow: hidden;
+    transition: opacity 0.5s ease;
+    margin: 0;
+    background-image: url('images/forest.png');
+    image-rendering: crisp-edges; 
+    image-rendering: pixelated;
+    background-size: 2000px;
+    background-position: center -1300px;
+    background-repeat: no-repeat;
+    text-align: center;
+
+  }
+
+  button {
+    transition: transform 0.2s ease; 
+}
+
+button:hover {
+    transform: scale(1.2); 
+}
+.menu {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: #390909;
+    color: rgb(255, 255, 255);
+    display: flex;
+    /* display: none; */
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    transition: transform 0.5s ease;
+    z-index: 1;
+    transform: translateY(0); 
+  }
+
+  .menu button {
+    margin: 10px;
+    padding: 15px 30px;
+    font-size: 18px;
+    cursor: pointer;
+    border: none;
+    background: #ffde4b;
+
+    color: rgb(0, 0, 0);
+    border-radius: 5px;
+  }
+
+  .menu.hide {
+    transform: translateY(-100%);
+    pointer-events: none;
+  }
+  
+  .menu.active {
+    transform: translateY(0);
+  }
+
+
+
+
+  h1 {
+    font-family: "Pirata One", system-ui;
+    font-size: 100px;
+    color: rgb(164, 10, 10); 
+    -webkit-text-stroke: 0.5px rgb(255, 212, 72); 
+    letter-spacing: 5px;
+    font-style: italic;
+}
+
+
+
+.word_box{
+    background-color: rgb(25, 41, 48);
+    width:100%;
+    height:5000px;
+    padding:20px;
+}
+/*
+SPRITESHEET CODE FROM THIS VIDEO
+https://www.youtube.com/watch?v=ekI7vjkFrGA
+*/
+
+/* CODE FOR MOVING SPRITESHEET */
+@keyframes moveSpriteSheet {
+    from {
+        transform: translate3d(0px,0,0);
+    }
+    to{
+        transform: translate3d(-100%,0,0);
+    }
+}
+
+.pixelart {
+    image-rendering: pixelated;
+}
+
+.character {
+    border-radius: 50%;
+    width: calc(100px * var(--pixelsize));
+    height: calc(100px * var(--pixelsize));
+    /* size of character */
+    transform: scale(3);
+    /* this makes it so that the box thats surrounding character isnt going over the start button */
+    pointer-events: none;
+    overflow: hidden;
+    position:relative;
+}
+
+.character-sprite {
+    width: calc(600px * var(--pixelsize));
+    height: calc(400px * var(--pixelsize));
+    position: absolute;
+    left: 0px;
+}
+
+
+.character-sprite.character-attack {
+    animation: moveSpriteSheet .4s steps(6) ;
+}
+
+.character-sprite.character-idle {
+    animation: moveSpriteSheet 1s steps(6) infinite;
+}
+
+
+
+/* 
+.monster-sprite.monster-idle {
+    animation: moveSpriteSheet 1s steps(6) infinite;
+}
+ */
+
+/*
+I'M NOT SURE HOW TO MAKE THESE ANIMATIONS ACTUALLY PLAY WHEN A CONDITION IS MET
+I'LL LEAVE THEM HERE FOR NOW
+
+.character-sprite.character-attack {
+    top: calc(-100px * var(--pixelsize));
+    animation: moveSpriteSheet 1s steps(6);
+}
+
+.character-sprite.character-hurt {
+    top: calc(-200px * var(--pixelsize));
+    animation: moveSpriteSheet 1s steps(6);
+}
+.character-sprite.character-death {
+    top: calc(-300px * var(--pixelsize));
+    animation: moveSpriteSheet 1s steps(6);
+}
+*/
+
+.monster {
+    border-radius: 50%;
+    width: calc(100px * var(--pixelsize));
+    height: calc(100px * var(--pixelsize));
+    transform: scale(3);
+    pointer-events: none;
+    overflow: hidden;
+    position:relative;
+}
+
+.monster-sprite {
+    width: calc(600px * var(--pixelsize));
+    height: calc(400px * var(--pixelsize));
+    position: absolute;
+    left: 0px;
+}
+
+.monster-sprite.monster-attack {
+    animation: moveSpriteSheet 1s steps(6) 0.6s;
+}
+
+.monster-sprite.monster-idle {
+    
+    animation: moveSpriteSheet 1s steps(6) infinite;
+}
+
+.monster-sprite.monster-death {
+    top: -900px;
+    animation: moveSpriteSheet 1s steps(6) infinite;
+}
+
+
+
+#word_time{
+    display:flex;
+    flex-direction: column;
+   gap:10px;
+}
+
+
+
+.hp {
+    width: 200px; 
+    height: 10%;
+    background-color: green;
+    border-radius: 10px;
+    position:relative;
+}
+
+
+.protag {
+    width:30%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    padding:0px;
+    gap:20px;
+    
+}
+
+
+.character.character-move {
+    animation: charAttack .6s;
+}
+
+.monster.monster-move {
+    animation: monsterAttack .6s;
+}
+
+
+.monster.injured, .character.injured {
+    animation: injure 0.5s ease;
+  }
+
+ 
+
+@keyframes injure {
+    0% {
+      filter: brightness(.5) sepia(1) hue-rotate(-50deg) saturate(5);
+    }
+    50% {
+      filter: brightness(.5) sepia(1) hue-rotate(-50deg) saturate(9);
+    }
+    100% {
+      filter: none;
+    }
+  }
+
+
+@keyframes charAttack {
+    0% {
+        transform: translateX(5%) scale(3);
+    }
+
+    25% {
+        transform: translateX(50%) scale(3);
+    }
+    60% {
+        transform: translateX(0%) scale(3);
+    }
+}
+
+
+@keyframes monsterAttack {
+    0% {
+        transform: translateX(-5%) scale(3);
+    }
+
+    50% {
+        transform: translateX(-50%) scale(3);
+
+    }
+    100% {
+        transform: translateX(0%) scale(3);
+    }
+}
+
+.enemy {
+    width:30%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+   
+    padding:0px;
+    gap:20px;
+}
+
+.border{
+
+    margin:30px;
+    display: flex;
+    justify-content: space-around;
+}
+
+#input {
+    font-family: sans-serif;
+}
+
+.input {
+    
+    background-color: rgb(255, 189, 84);
+    height:200px;
+    width:90%;
+    margin:auto;
+ 
+}
+
+
+h1 {
+    margin:30px;
+}
+
+#word {
+    font-family: "Sour Gummy", sans-serif;
+}
+
+.word_section {
+  
+    background-color: rgb(187, 220, 164);
+    border-color: rgb(118, 169, 112);
+    width: 50%;
+    height:50px;
+    margin:auto;
+    display:flex;
+    align-items: center;
+    justify-content: center;
+    border-style:solid;
+    border-width: 6px;
+    border-radius: 5px;
+    
+}
+
+.score-section {
+    color:white;
+}
+
+#word {
+    font-size: 30px;
+    font-weight: bold;
+    margin: 20px;
+}
+#timer {
+    color: rgb(255, 0, 0);
+    font-size: 20px;
+}
+
+.time_section {
+    color:#c3ddca
+}
+
+#start-btn {
+    font-family: "Sour Gummy", sans-serif;
+    padding: 10px 25px;
+    font-size:20px;
+    cursor: pointer;
+    border: none;
+    background: #7bcd62;
+    color: white;
+    border-radius: 3px;
+
+}
+
+#start-btn.start_disabled {
+
+background:red;
+  pointer-events: none;
+  display:none;
+}
+
+/* rgb(255, 199, 43); */
+#reset-button {
+    font-family: "Sour Gummy", sans-serif;
+    margin: 10px;
+    margin-top:30px;
+    padding: 10px;
+    font-size: 18px;
+    cursor: pointer;
+    border: none;
+    background: #546267;
+    color: white;
+    border-radius: 5px;
+}
+
+#reset-button.gameover_reset{
+    font-family: "Sour Gummy", sans-serif;
+    display:block;
+    z-index: 1000;
+    animation: gameoverpulse 1.5s infinite;
+    padding: 15px;
+    font-size: 1.3rem;
+    background: #ffffff;
+    color: rgb(0, 0, 0);
+    box-shadow: 0px 0px 28px 8px rgba(0, 0, 0, 0.20);
+}
+
+
+
+#input {
+    padding:50px;
+    font-size:50px
+}
+
+/* monster defeat */
+
+#message.character_defeat,
+#message.perfect_run,
+#message.defeat_container,
+#message.monster_defeat {
+    pointer-events: none;
+    width: 200%;
+    height:200vh;
+    font-size: 100px;
+    position: absolute;
+    top:50%;
+    left: 50%;
+    transform: translate(-50%, -50%);  
+    font-family: "Pirata One", system-ui;
+    text-align: center;
+    box-sizing: border-box;
+    animation: pulse 1.5s infinite;
+    display:flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 5;
+}
+
+
+#message.character_defeat {
+    background-color: rgb(185, 9, 9);
+}
+
+#message.monster_defeat {
+    background-color: rgb(28, 219, 73);
+}
+
+#message.perfect_run {
+    background-color: rgb(255, 199, 43);
+}
+
+
+
+@keyframes pulse {
+    0% {
+        transform: translate(-50%, -50%) scale(0.95);
+
+    }
+
+    60% {
+        transform: translate(-50%, -50%) scale(1);
+       
+    }
+
+    100% {
+        transform: translate(-50%, -50%) scale(0.95);
+      
+    }
+}
+
+.buttons {
+    display:flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin:20px;
+}
